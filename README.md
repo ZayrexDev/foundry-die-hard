@@ -1,3 +1,14 @@
+# About This Fork
+
+__This fork has been edited to fit DnD5e on Foundry V12.__
+
+The original project has ceased updating, the current version has serious problem with V12, and I couldn't find and other module that can do the same function, so I managed to deleted some features to make it work properly.
+
+I have never learned to make a module, or with js codes, so what I can only do is deleting some part of the module. It makes the module running again, but the cost is the loss of some features. In this case, I deleted the filter of the fudge. It means the fudge can now only be set on raw dice, no matter what is the roll's purpose.
+
+I didn't change the code of other systems like PF2e, and I'm not sure whether the have the issue too.
+
+
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/UranusBytes/foundry-die-hard) ![GitHub Releases](https://img.shields.io/github/downloads/UranusBytes/foundry-die-hard/latest/total) ![GitHub Releases](https://img.shields.io/github/downloads/UranusBytes/foundry-die-hard/total)
 
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ffoundry-die-hard&colorB=4aa94a) ![Foundry Version](https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https%3A%2F%2Fgithub.com%2FUranusBytes%2Ffoundry-die-hard%2Freleases%2Flatest%2Fdownload%2Fmodule.json) 

@@ -8,8 +8,7 @@ export default class DieHardSystem {
 
     // Total rolls
     CONFIG.Dice.Roll = Roll;
-    libWrapper.register('foundry-die-hard', 'CONFIG.Dice.Roll.prototype.evaluate', this.wrapRollEvaluate, 'WRAPPER');
-
+    // libWrapper.register('foundry-die-hard', 'CONFIG.Dice.Roll.prototype.evaluate', this.wrapRollEvaluate, 'WRAPPER');
     // Raw rolls
     libWrapper.register('foundry-die-hard', 'CONFIG.Dice.termTypes.DiceTerm.prototype.roll', this.wrapDiceTermRoll, 'MIXED');
 
@@ -150,9 +149,11 @@ export default class DieHardSystem {
    * @param eval_options
    * @returns {{result: undefined, active: boolean}|*}
    */
-  wrapDiceTermRoll(wrapped, eval_options) {
+  async wrapDiceTermRoll(wrapped, eval_options) {
     let functionLogName = 'DieHardSystem.wrapDiceTermRoll'
     dieHardLog(false, functionLogName);
+
+    let roll = null;
 
     if (! DieHardSetting('fudgeEnabled') ) {
       dieHardLog(false, functionLogName + ' - Fudge disabled');
@@ -170,7 +171,9 @@ export default class DieHardSystem {
         let failedRolls = [];
         let SafetyLoopIndex = DieHardSetting('dieHardSettings').fudgeConfig.maxFudgeAttemptsPerRoll;
         let newResult = undefined
-        let roll = {result: undefined, active: true};
+
+        roll = {result: undefined, active: true};
+
         while (gen_new_result && SafetyLoopIndex > 0) {
           SafetyLoopIndex--;
 
@@ -216,7 +219,7 @@ export default class DieHardSystem {
           game.dieHardSystem.disableUserFudge(userFudge.id)
         }
         // Return the fudged roll; no taking karma into consideration
-        return roll
+        return roll;
       }
       // No user fudging to occur; continue roll as usual
     }
@@ -331,12 +334,17 @@ export default class DieHardSystem {
           dieHardLog(false, functionLogName + ' - avg Karma disabled');
         }
         this.results.push(roll);
-        return roll
+        return roll;
       } else {
         dieHardLog(false, functionLogName + ' - Simple and Avg Karma Disabled');
       }
     }
-    return wrapped(eval_options)
+
+    if(roll !== null) {
+      return roll;
+    } else {
+      return wrapped(eval_options);
+    }
   }
 
   /**
